@@ -1,62 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# orderbird Senior Frontend Tech Challenge
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Hey Front End developer. Welcome. Your mission, should you decide to accept it, is to carve out 3 hours and create a SPA using [Laravel](https://laravel.com/), [Tailwind](https://tailwindcss.com/), and your JavaScript library of preference.
 
-## About Laravel
+The objective of the challenge is to display a table of users. It has to be sortable (both asc. and desc.) by first name, last name, and email address.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The table on the view must be responsive: it should be centered vertically and horizontally on desktop and tablet, with a max. width of `768px`, but occupy the entire screen on mobile devices. Allow horizontal scroll to prevent breaking the rows only when necessary.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Desired outcome
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- It must be a Single Page Application
+- Do not use jQuery
+- Go all the way with the latest ECMAScript specs (you'll possibly need to update `webpack` config)
+- Include tests (at least unit tests)
+- Modularize whenever possible, avoid creating files with hundred of lines
+- Your submission for this challenge runs without issues nor warnings
 
-## Learning Laravel
+## Important!
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+We hope you can spend about three hours on this project. If you can finish faster, great! If not, limit yourself and don't spend much longer.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+You'll need the `WWWUSER` and `WWWGROUP` env vars to set the correct permissions in the docker containers. Either:  
+- export them from your shell (inline or in your .\*rc file): `export WWWUSER=${WWWUSER:-$UID} && export WWWGROUP=${WWWGROUP:-$(id -g)}` or
+- run `docker-compose` this way: `WWWUSER=${WWWUSER:-$UID} WWWGROUP=${WWWGROUP:-$(id -g)} docker-compose <YOUR_SUBCOMMAND_HERE>`.
 
-## Laravel Sponsors
+## Required steps for a valid solution
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Create your own base branch, branch out from it by feature, and squash merge back into your base branch when you complete each feature
+1. Run the containers for the development environment using `docker-compose`. Running the stack on a non-dockerized environment is not a valid approach  
+1. Add Tailwind as a project dependency and use it on the views
+1. Write a migration to create ten (10) users with: first name, last name and email address. The migration should be able to rollback
+1. Write a seed to populate the users
+1. Write a view to display the users data from the database in a table. Fetch the data from `/users`
+1. Write a JavaScript solution to sort the users table by any of the fields: you can use any library (React, Vue, etc), but you **can't implement** a pre-made package with this functionality (e.g. [DataTables](https://www.datatables.net/))
 
-### Premium Partners
+## We'll take into consideration:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+- Your git commit history:
 
-## Contributing
+  The log of the repository should follow [this guideline](https://chris.beams.io/posts/git-commit/). Please read at least [The Seven Rules](https://chris.beams.io/posts/git-commit/#seven-rules) listed in the article and apply them.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- The quality of your code; keep it tidy, linted, and DRY:
+  - Use *only* spaces for indentation (no tabs allowed): this repo contains an [editorconfig](https://editorconfig.org/) file, please use it in your editor/IDE 
+  - **HTML/Blade**: indent the code with 2 spaces and avoid long lines in the code. You can set one HTML attribute per line (think React style for JSX) and split the values in multiple lines
+  - **JavaScript**: use [eslint](https://www.npmjs.com/package/eslint) with the config provided on this repo
+  - **PHP**: follow the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding style. [php-cs-fixer](https://github.com/FriendsOfPhp/PHP-CS-Fixer) can help you to enforce this style
+  - Keep files and folders unrelated to the project out of the repo: .idea, \*.swp, .vscode, .DS\_Store, vendor, etc. **should not** be commited. Update `.gitignore` if necessary
 
-## Code of Conduct
+## Nice to have
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Anything else you would like to add
 
-## Security Vulnerabilities
+## When you finish
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Please send your solution as a zipped package to [tech-challenge@orderbird.com](mailto:tech-challenge@orderbird.com), **including** your `.git` folder.
