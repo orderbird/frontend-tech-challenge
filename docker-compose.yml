@@ -3,7 +3,7 @@ version: '3'
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.0
+            context: 'https://raw.githubusercontent.com/laravel/sail/1.x/runtimes/8.0/Dockerfile'
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -14,6 +14,7 @@ services:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
         volumes:
+            - './composer:/bin/composer'
             - '.:/var/www/html'
         networks:
             - sail
